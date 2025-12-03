@@ -1,5 +1,7 @@
-@import "tailwindcss";
+/* Import Google Fonts - MUST BE FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
+@import "tailwindcss";
 
 @theme {
   --color-border:hsl(var(--border));
@@ -8,8 +10,12 @@
 
   --color-primary:hsl(var(--primary));
   --color-primary-foreground:hsl(var(--primary-foreground));
+  --color-secondary:hsl(var(--secondary));
+  --color-accent:hsl(var(--accent));
 
   --color-card:hsl(var(--card));
+  --color-muted:hsl(var(--muted));
+  --color-muted-foreground:hsl(var(--muted-foreground));
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
@@ -19,72 +25,88 @@
   --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
+  
   @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
+  
   @keyframes fade-in {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
     to {
-      opacity: 0;
+      opacity: 1;
       transform: translateY(0);
     }
   }
+  
   @keyframes meteor {
     0% {
       transform: rotate(215deg) translateX(0);
       opacity: 1;
     }
-    70% {
-      opacity: 1;
-    }
+    70% { opacity: 1; }
     100% {
       transform: rotate(215deg) translateX(-500px);
       opacity: 0;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Light Mode - Warm Red Theme */
+    --background: 0 20% 98%;
+    --foreground: 0 30% 10%;
 
     --card: 0 0% 100%;
+    --muted: 0 20% 96%;
+    --muted-foreground: 0 10% 45%;
 
-    --primary:250 47% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 14 91% 55%;
+    --accent: 10 95% 58%;
 
-    --border: 214 32% 91%;
+    --border: 0 20% 88%;
   }
+  
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
+    /* Dark Mode - Luxurious Red on Dark */
+    --background: 240 10% 6%;
+    --foreground: 0 20% 98%;
 
-    --card: 222 47% 8%;
+    --card: 240 8% 10%;
+    --muted: 240 5% 16%;
+    --muted-foreground: 0 10% 70%;
 
-    --primary:250 65% 65%;
-    --primary-foreground: 213 31% 91%;
+    --primary: 0 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 14 100% 60%;
+    --accent: 10 100% 65%;
 
-    --border: 217 33% 20%;
+    --border: 240 5% 22%;
   }
 
   * {
@@ -92,12 +114,18 @@
   }
 
   html {
-    @apply scroll-smooth;;
+    @apply scroll-smooth;
   }
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    font-family: 'Urbanist', sans-serif !important;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Force Urbanist font on all text elements */
+  h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, li, div {
+    font-family: 'Urbanist', sans-serif !important;
   }
 }
 
@@ -105,42 +133,32 @@
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width >= 640px) {
-    max-width: 640px;
-  }
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1280px) {
-    max-width: 1280px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1400px) { max-width: 1400px; }
 }
 
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(167,139,250,0.5);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 0 0 40px rgba(239, 68, 68, 0.3);
 }
 
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20;
 }
 
 @utility gradient-border {
   @apply relative rounded-md;
-  background: linera-gradient(to right, hsl(var(--card)),hsl(var(--card)));
+  background: linear-gradient(to right, hsl(var(--card)),hsl(var(--card)));
   background-clip: padding-box;
   border: 1px solid transparent;
 }
 
 @utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
-         transition-all duration-300 hover:shadow-[0_0_10px_rrgba(139,92,246,0.5)]
+  @apply px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold
+         transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]
          hover:scale-105 active:scale-95;
 }
 
@@ -150,8 +168,26 @@
 }
 
 @utility meteor {
-  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
+  @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255,255,255,0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
 }
 
 #root {

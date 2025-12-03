@@ -8,6 +8,7 @@ import {
   Linkedin,
   FileText,
   Loader,
+  Heart,
 } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
@@ -53,8 +54,8 @@ export function ContactSection() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+91-1234567890",
-      link: "tel:+911234567890",
+      value: "+91-6202456608",
+      link: "tel:+916202456608",
     },
     {
       icon: MapPin,
@@ -65,13 +66,24 @@ export function ContactSection() {
   ];
 
   const socialLinks = [
-    { icon: Github, link: "https://github.com/Ankita2629", name: "GitHub" },
+    {
+      icon: Github,
+      link: "https://github.com/ankita-singhhh",
+      name: "GitHub",
+      color: "hover:text-gray-900 dark:hover:text-white",
+    },
     {
       icon: Linkedin,
-      link: "https://linkedin.com/in/ankita-singh-932729309",
+      link: "https://www.linkedin.com/in/ankitaa-singh",
       name: "LinkedIn",
+      color: "hover:text-blue-600",
     },
-    { icon: FileText, link: "#", name: "Portfolio" },
+    {
+      icon: FileText,
+      link: "#",
+      name: "Portfolio",
+      color: "hover:text-primary",
+    },
   ];
 
   return (
@@ -108,10 +120,17 @@ export function ContactSection() {
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Get In <span className="text-primary">Touch</span>
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-primary/30">
+            <Heart className="w-4 h-4" />
+            Let's Connect
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Get In{" "}
+            <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              Touch
+            </span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? Feel free to reach
             out, I'm always open to discussing new opportunities.
           </p>
@@ -121,7 +140,9 @@ export function ContactSection() {
           {/* Left Side - Contact Info */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-8 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+                Contact Information
+              </h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
@@ -133,14 +154,14 @@ export function ContactSection() {
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 group cursor-pointer"
                     >
-                      <div className="p-3 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-300">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300">
                         <Icon className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <div className="text-muted-foreground text-sm mb-1">
+                        <div className="text-muted-foreground text-sm mb-1 font-medium">
                           {info.title}
                         </div>
-                        <div className="group-hover:text-primary transition-colors">
+                        <div className="group-hover:text-primary transition-colors font-semibold">
                           {info.value}
                         </div>
                       </div>
@@ -152,7 +173,9 @@ export function ContactSection() {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Connect With Me</h4>
+              <h4 className="text-lg font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+                Connect With Me
+              </h4>
               <div className="flex gap-3">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
@@ -162,7 +185,7 @@ export function ContactSection() {
                       href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-transparent border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-110"
+                      className={`p-3 bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-border rounded-xl hover:border-primary/50 transition-all duration-300 hover:scale-110 ${social.color}`}
                       title={social.name}
                     >
                       <Icon className="w-5 h-5" />
@@ -174,12 +197,14 @@ export function ContactSection() {
           </div>
 
           {/* Right Side - Contact Form */}
-          <div className="bg-transparent backdrop-blur-xl rounded-2xl p-8 border border-gray-200 dark:border-slate-800">
-            <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+          <div className="bg-card/50 backdrop-blur-xl rounded-2xl p-8 border-2 border-border hover:border-primary/30 transition-all duration-300 shadow-xl">
+            <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              Send a Message
+            </h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">
+                <label className="block text-sm text-muted-foreground mb-2 font-medium">
                   Your Name
                 </label>
                 <input
@@ -188,13 +213,13 @@ export function ContactSection() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="w-full px-4 py-3 bg-background/50 backdrop-blur-sm border-2 border-border rounded-xl focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/50"
                   placeholder="Enter Your Name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">
+                <label className="block text-sm text-muted-foreground mb-2 font-medium">
                   Your Email
                 </label>
                 <input
@@ -203,13 +228,13 @@ export function ContactSection() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-transparent border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="w-full px-4 py-3 bg-background/50 backdrop-blur-sm border-2 border-border rounded-xl focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/50"
                   placeholder="abc@gmail.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">
+                <label className="block text-sm text-muted-foreground mb-2 font-medium">
                   Your Message
                 </label>
                 <textarea
@@ -218,7 +243,7 @@ export function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-transparent border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500 resize-none"
+                  className="w-full px-4 py-3 bg-background/50 backdrop-blur-sm border-2 border-border rounded-xl focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/50 resize-none"
                   placeholder="Type your message here..."
                 />
               </div>
@@ -226,7 +251,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 rounded-full font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/50 text-white"
+                className="w-full py-4 bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary/90 hover:via-secondary/90 hover:to-accent/90 rounded-full font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/50 text-white hover:scale-105 active:scale-95"
               >
                 {isSubmitting ? (
                   <>
