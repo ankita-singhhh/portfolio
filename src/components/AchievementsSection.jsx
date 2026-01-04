@@ -1,4 +1,4 @@
-import { Trophy, Award, Star, Zap, MapPin } from "lucide-react";
+import { Trophy, Award, Star, Zap, MapPin, Brain } from "lucide-react";
 import { useState } from "react";
 
 export const AchievementsSection = () => {
@@ -7,6 +7,20 @@ export const AchievementsSection = () => {
   const achievements = [
     {
       id: 1,
+      title: "SPARKATHON - AI-Driven Personalized Medicine & Smart Agriculture",
+      position: "Winners - 1st Place",
+      icon: Brain,
+      year: "2025",
+      institution: "Buddha Innovation Council (BIC)",
+      description:
+        "Won first place at the inaugural SPARKATHON with an integrated platform combining DNA sequencing, AI/ML predictive models, and IoT for personalized healthcare and precision farming. Developed supervised learning models for drug dosage prediction and IoT-based NPK soil monitoring systems.",
+      color: "from-blue-500/20 via-cyan-500/20 to-teal-500/20",
+      iconColor: "text-blue-500",
+      borderColor: "border-blue-500/50",
+      badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
+    },
+    {
+      id: 2,
       title: "techYuva 10.0 - Innovative Model Presentation Competition",
       position: "1st Place Winner",
       icon: Trophy,
@@ -20,7 +34,7 @@ export const AchievementsSection = () => {
       badgeColor: "bg-red-500/20 text-red-500 border-red-500/30",
     },
     {
-      id: 2,
+      id: 3,
       title: "techYuva 9.0 - Innovative Model Presentation Competition",
       position: "2nd Place Runner Up",
       icon: Award,
@@ -66,7 +80,7 @@ export const AchievementsSection = () => {
         </div>
 
         {/* Achievements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {achievements.map((achievement, index) => {
             const Icon = achievement.icon;
             const isHovered = hoveredAchievement === achievement.id;
@@ -85,7 +99,7 @@ export const AchievementsSection = () => {
               >
                 {/* Card */}
                 <div
-                  className={`relative bg-card/50 backdrop-blur-md rounded-2xl p-8 border-2 transition-all duration-500 h-full ${
+                  className={`relative bg-card/50 backdrop-blur-md rounded-2xl p-6 border-2 transition-all duration-500 h-full ${
                     isHovered
                       ? `${achievement.borderColor} shadow-2xl shadow-red-500/20 scale-105`
                       : "border-border hover:border-red-500/30"
@@ -113,16 +127,16 @@ export const AchievementsSection = () => {
 
                   <div className="relative z-10">
                     {/* Icon & Badge */}
-                    <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-start justify-between mb-4">
                       <div
-                        className={`p-4 rounded-2xl bg-gradient-to-br transition-all duration-500 ${
+                        className={`p-3 rounded-2xl bg-gradient-to-br transition-all duration-500 ${
                           isHovered
                             ? `${achievement.color} scale-110 rotate-6`
                             : "bg-card"
                         }`}
                       >
                         <Icon
-                          className={`w-10 h-10 ${
+                          className={`w-8 h-8 ${
                             achievement.iconColor
                           } transition-transform duration-500 ${
                             isHovered ? "scale-110" : ""
@@ -131,7 +145,7 @@ export const AchievementsSection = () => {
                       </div>
 
                       <div
-                        className={`px-4 py-2 rounded-full text-xs font-bold border-2 transition-all duration-300 ${achievement.badgeColor}`}
+                        className={`px-3 py-1 rounded-full text-xs font-bold border-2 transition-all duration-300 ${achievement.badgeColor}`}
                       >
                         {achievement.year}
                       </div>
@@ -139,7 +153,7 @@ export const AchievementsSection = () => {
 
                     {/* Position Badge */}
                     <div
-                      className={`inline-block px-4 py-2 rounded-full text-sm font-bold mb-4 transition-all duration-300 ${
+                      className={`inline-block px-3 py-1.5 rounded-full text-xs font-bold mb-3 transition-all duration-300 ${
                         isHovered
                           ? `${achievement.badgeColor} scale-105`
                           : "bg-primary/10 text-primary border border-primary/30"
@@ -150,7 +164,7 @@ export const AchievementsSection = () => {
 
                     {/* Title */}
                     <h3
-                      className={`text-xl font-bold mb-4 leading-tight transition-colors duration-300 ${
+                      className={`text-base font-bold mb-3 leading-tight transition-colors duration-300 ${
                         isHovered ? "text-red-500" : ""
                       }`}
                     >
@@ -158,20 +172,20 @@ export const AchievementsSection = () => {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                       {achievement.description}
                     </p>
 
                     {/* Institution */}
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <MapPin className="w-4 h-4 text-primary" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <MapPin className="w-3.5 h-3.5 text-primary" />
                       <span>{achievement.institution}</span>
                     </div>
                   </div>
 
                   {/* Decorative corner */}
                   <div
-                    className={`absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl ${
+                    className={`absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl ${
                       achievement.color
                     } rounded-tl-full opacity-20 transition-opacity duration-300 ${
                       isHovered ? "opacity-40" : ""
@@ -184,39 +198,45 @@ export const AchievementsSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 text-center border border-border hover:border-red-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
             <Trophy className="w-10 h-10 mx-auto mb-3 text-red-500" />
-            <div className="text-3xl font-bold text-red-500 mb-2">2+</div>
+            <div className="text-3xl font-bold text-red-500 mb-2">3+</div>
             <div className="text-sm text-muted-foreground">Awards Won</div>
           </div>
 
           <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 text-center border border-border hover:border-red-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
             <Star className="w-10 h-10 mx-auto mb-3 text-rose-500" />
-            <div className="text-3xl font-bold text-rose-500 mb-2">1st</div>
-            <div className="text-sm text-muted-foreground">Place Winner</div>
+            <div className="text-3xl font-bold text-rose-500 mb-2">2x</div>
+            <div className="text-sm text-muted-foreground">1st Place</div>
+          </div>
+
+          <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 text-center border border-border hover:border-red-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+            <Brain className="w-10 h-10 mx-auto mb-3 text-blue-500" />
+            <div className="text-3xl font-bold text-blue-500 mb-2">AI/ML</div>
+            <div className="text-sm text-muted-foreground">Hackathon Win</div>
           </div>
 
           <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 text-center border border-border hover:border-red-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
             <Zap className="w-10 h-10 mx-auto mb-3 text-pink-500" />
-            <div className="text-3xl font-bold text-pink-500 mb-2">2</div>
-            <div className="text-sm text-muted-foreground">Years Competing</div>
+            <div className="text-3xl font-bold text-pink-500 mb-2">3</div>
+            <div className="text-sm text-muted-foreground">Competitions</div>
           </div>
         </div>
       </div>
 
       <style>{`
-                @keyframes fadeInScale {
-                    from {
-                        opacity: 0;
-                        transform: scale(0.9) translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: scale(1) translateY(0);
-                    }
-                }
-            `}</style>
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 };
