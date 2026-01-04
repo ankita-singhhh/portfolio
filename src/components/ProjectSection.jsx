@@ -15,6 +15,14 @@ import {
   Video,
 } from "lucide-react";
 
+// Import images (place these files in src/assets/projects/)
+// Make sure to create these images with names matching the imports below
+import AmplyFiImage from "../assets/projects/amplyfi-ai.png";
+import ChatMateImage from "../assets/projects/chatmate.png";
+import ManoMitraImage from "../assets/projects/manomitra.png";
+import IRAImage from "../assets/projects/ira.png";
+import CollegeWebsiteImage from "../assets/projects/college-website.png";
+
 export const ProjectSection = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   const [expandedProject, setExpandedProject] = useState(null);
@@ -25,6 +33,7 @@ export const ProjectSection = () => {
       id: 1,
       title: "AmplyFi AI - AI Music Generation SaaS",
       icon: Music,
+      image: AmplyFiImage,
       date: "December 2025",
       category: "ai",
       description:
@@ -59,7 +68,7 @@ export const ProjectSection = () => {
       impact: {
         models: "3",
         features: "11+",
-        processing: "Serverless GPU",
+        processing: "Serverless",
       },
       github: "https://github.com/ankita-singhhh/AmplyFi-AI",
       live: "https://github.com/ankita-singhhh/AmplyFi-AI",
@@ -71,6 +80,7 @@ export const ProjectSection = () => {
       id: 2,
       title: "ChatMate - Real-Time Messaging & Video Calls",
       icon: Video,
+      image: ChatMateImage,
       date: "November 2025",
       category: "fullstack",
       description:
@@ -113,6 +123,7 @@ export const ProjectSection = () => {
       id: 3,
       title: "ManoMitra - AI Mental Wellness Companion",
       icon: Brain,
+      image: ManoMitraImage,
       date: "October 2025",
       category: "ai",
       description:
@@ -141,6 +152,7 @@ export const ProjectSection = () => {
       id: 4,
       title: "IRA - Your Smart Buddy",
       icon: Mic,
+      image: IRAImage,
       date: "September - October 2025",
       category: "ai",
       description:
@@ -176,6 +188,7 @@ export const ProjectSection = () => {
       id: 5,
       title: "Buddha Institute of Technology - College Website",
       icon: Globe,
+      image: CollegeWebsiteImage,
       date: "October 2024",
       category: "web",
       description:
@@ -242,7 +255,7 @@ export const ProjectSection = () => {
         />
       </div>
 
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
@@ -282,26 +295,25 @@ export const ProjectSection = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {filteredProjects.map((project, index) => {
             const Icon = project.icon;
             const isHovered = hoveredProject === project.id;
             const isExpanded = expandedProject === project.id;
+            const isEven = index % 2 === 0;
 
             return (
               <div
                 key={project.id}
                 className={`group relative bg-card/50 backdrop-blur-md rounded-2xl border-2 overflow-hidden transition-all duration-500 ${
                   isHovered
-                    ? "border-primary shadow-2xl shadow-primary/20 scale-[1.01]"
+                    ? "border-primary shadow-2xl shadow-primary/20"
                     : "border-border hover:border-primary/50"
                 }`}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
                 style={{
-                  animation: `fadeInUp 0.5s ease-out ${
-                    index * 0.15
-                  }s backwards`,
+                  animation: `fadeInUp 0.5s ease-out ${index * 0.15}s backwards`,
                 }}
               >
                 {/* Gradient overlay */}
@@ -313,152 +325,167 @@ export const ProjectSection = () => {
                   }`}
                 />
 
-                <div className="relative z-10 p-6 md:p-8">
-                  {/* Project Header */}
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div
-                        className={`p-3 rounded-xl bg-primary/10 transition-all duration-500 ${
-                          isHovered ? "rotate-6 scale-110" : ""
-                        }`}
-                      >
-                        <Icon className="w-7 h-7 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2 flex-wrap">
-                          <h3
-                            className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${
-                              isHovered ? "text-primary" : ""
-                            }`}
+                <div className="relative z-10">
+                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-8 ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
+                    {/* Image Section */}
+                    <div className={`${!isEven ? 'lg:col-start-2' : ''} relative group/image`}>
+                      <div className="relative rounded-xl overflow-hidden border-2 border-border group-hover/image:border-primary/50 transition-all duration-300">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-auto object-cover aspect-video transform group-hover/image:scale-105 transition-transform duration-500"
+                        />
+                        {/* Overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-3">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 rounded-full bg-background/90 hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-110"
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            {project.title}
-                          </h3>
-                          <span
-                            className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all duration-300 ${
-                              project.status === "Live"
-                                ? "bg-green-500/20 text-green-400 border-green-500/30"
-                                : "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                            }`}
+                            <Github className="w-5 h-5" />
+                          </a>
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 rounded-full bg-background/90 hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-110"
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            ● {project.status}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <Calendar className="w-4 h-4" />
-                          <span>{project.date}</span>
-                        </div>
-                        {project.badge && (
-                          <span className="inline-block px-3 py-1 text-xs font-semibold bg-primary/20 text-primary rounded-full border border-primary/30">
-                            {project.badge}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-2">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-110"
-                        title="View on GitHub"
-                      >
-                        <Github className="w-5 h-5" />
-                      </a>
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-110"
-                        title="View Live Demo"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {project.longDescription}
-                  </p>
-
-                  {/* Impact Metrics */}
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    {Object.entries(project.impact).map(([key, value]) => (
-                      <div
-                        key={key}
-                        className="bg-card/80 rounded-lg p-3 text-center border border-border hover:border-primary/50 transition-all duration-300"
-                      >
-                        <div className="text-lg md:text-xl font-bold text-primary mb-1">
-                          {value}
-                        </div>
-                        <div className="text-xs text-muted-foreground capitalize">
-                          {key}
+                            <ExternalLink className="w-5 h-5" />
+                          </a>
                         </div>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Technologies */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-primary mb-3 flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4" />
-                      Technologies Used
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1.5 text-sm rounded-lg bg-card/80 border border-border hover:border-primary/50 transition-all duration-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
                     </div>
-                  </div>
 
-                  {/* Expandable Features Section */}
-                  <div>
-                    <button
-                      onClick={() => toggleExpand(project.id)}
-                      className="w-full flex items-center justify-between text-sm font-semibold text-primary mb-3 hover:text-primary/80 transition-colors"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4" />
-                        Key Features ({project.features.length})
-                      </span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
-                      )}
-                    </button>
-
-                    <div
-                      className={`overflow-hidden transition-all duration-500 ${
-                        isExpanded
-                          ? "max-h-96 opacity-100"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                        {project.features.map((feature, featureIndex) => (
+                    {/* Content Section */}
+                    <div className={`flex flex-col ${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                      {/* Header */}
+                      <div className="mb-4">
+                        <div className="flex items-start gap-3 mb-3">
                           <div
-                            key={featureIndex}
-                            className="flex items-start gap-3 text-sm text-muted-foreground bg-card/50 p-3 rounded-lg hover:bg-card/80 transition-colors duration-300"
-                            style={{
-                              animation: isExpanded
-                                ? `slideIn 0.3s ease-out ${
-                                    featureIndex * 0.05
-                                  }s backwards`
-                                : "none",
-                            }}
+                            className={`p-2.5 rounded-lg bg-primary/10 transition-all duration-500 ${
+                              isHovered ? "rotate-6 scale-110" : ""
+                            }`}
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                            <span>{feature}</span>
+                            <Icon className="w-6 h-6 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <h3
+                                className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${
+                                  isHovered ? "text-primary" : ""
+                                }`}
+                              >
+                                {project.title}
+                              </h3>
+                              <span
+                                className={`px-2.5 py-1 text-xs font-semibold rounded-full border transition-all duration-300 ${
+                                  project.status === "Live"
+                                    ? "bg-green-500/20 text-green-400 border-green-500/30"
+                                    : "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                                }`}
+                              >
+                                ● {project.status}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2 flex-wrap">
+                              <div className="flex items-center gap-1.5">
+                                <Calendar className="w-3.5 h-3.5" />
+                                <span>{project.date}</span>
+                              </div>
+                              {project.badge && (
+                                <span className="px-2.5 py-0.5 text-xs font-semibold bg-primary/20 text-primary rounded-full border border-primary/30">
+                                  {project.badge}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                        {project.longDescription}
+                      </p>
+
+                      {/* Impact Metrics */}
+                      <div className="grid grid-cols-3 gap-3 mb-4">
+                        {Object.entries(project.impact).map(([key, value]) => (
+                          <div
+                            key={key}
+                            className="bg-background/50 rounded-lg p-2.5 text-center border border-border hover:border-primary/50 transition-all duration-300"
+                          >
+                            <div className="text-base md:text-lg font-bold text-primary mb-0.5">
+                              {value}
+                            </div>
+                            <div className="text-xs text-muted-foreground capitalize">
+                              {key}
+                            </div>
                           </div>
                         ))}
+                      </div>
+
+                      {/* Technologies */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
+                          <TrendingUp className="w-4 h-4" />
+                          Technologies
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.slice(0, 6).map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-2.5 py-1 text-xs rounded-lg bg-background/50 border border-border hover:border-primary/50 transition-all duration-300"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                          {project.technologies.length > 6 && (
+                            <span className="px-2.5 py-1 text-xs rounded-lg bg-background/50 border border-border text-muted-foreground">
+                              +{project.technologies.length - 6} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Expandable Features */}
+                      <div className="mt-auto">
+                        <button
+                          onClick={() => toggleExpand(project.id)}
+                          className="w-full flex items-center justify-between text-sm font-semibold text-primary hover:text-primary/80 transition-colors py-2"
+                        >
+                          <span className="flex items-center gap-2">
+                            <Sparkles className="w-4 h-4" />
+                            Key Features ({project.features.length})
+                          </span>
+                          {isExpanded ? (
+                            <ChevronUp className="w-4 h-4" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4" />
+                          )}
+                        </button>
+
+                        <div
+                          className={`overflow-hidden transition-all duration-500 ${
+                            isExpanded
+                              ? "max-h-96 opacity-100 mt-2"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          <div className="grid grid-cols-1 gap-2">
+                            {project.features.map((feature, featureIndex) => (
+                              <div
+                                key={featureIndex}
+                                className="flex items-start gap-2 text-sm text-muted-foreground bg-background/30 p-2 rounded-lg"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                <span>{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -505,28 +532,17 @@ export const ProjectSection = () => {
       </div>
 
       <style>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(30px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                
-                @keyframes slideIn {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-10px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
-            `}</style>
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 };

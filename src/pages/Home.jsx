@@ -5,6 +5,7 @@ import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { EducationSection } from "@/components/EducationSection";
 import { SkillsSection } from "../components/SkillsSection";
+import ExperienceSection from "../components/ExperienceSection"; // ADD THIS LINE
 import { ProjectSection } from "../components/ProjectSection";
 import { AchievementsSection } from "@/components/AchievementsSection";
 import { ContactSection } from "../components/ContactSection";
@@ -28,6 +29,7 @@ const Home = () => {
         <AboutSection />
         <EducationSection />
         <SkillsSection />
+        <ExperienceSection />  {/* ADD THIS LINE - Place it after Skills */}
         <ProjectSection />
         <AchievementsSection />
         <ContactSection />
